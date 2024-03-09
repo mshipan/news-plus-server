@@ -45,7 +45,7 @@ async function run() {
 
     // Apis Start
     app.use("/posts", postApi(postCollection));
-    app.use("/users", postApi(usersCollection));
+    app.use("/users", usersApi(usersCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
