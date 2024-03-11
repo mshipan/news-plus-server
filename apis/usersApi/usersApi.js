@@ -6,7 +6,6 @@ const usersApi = (usersCollection) => {
   //   store user in db
   userRouter.post("/", async (req, res) => {
     const user = req.body;
-    console.log(user);
     const query = { uid: user.email };
     const existingUser = await usersCollection.findOne(query);
     if (existingUser) {
@@ -16,6 +15,18 @@ const usersApi = (usersCollection) => {
     res.send(result);
   });
 
+  // get all users
+  userRouter.get("/", async (req, res) => {
+    let query = {};
+    const email = req.query.email;
+    if (req.query.email) {
+      query: {
+        email: email;
+      }
+    }
+    const result = await usersCollection.find(query).toArray();
+    res.send(result);
+  });
   return userRouter;
 };
 module.exports = usersApi;
