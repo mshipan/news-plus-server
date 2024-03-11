@@ -1,12 +1,18 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
+// Increase payload size limit (e.g., 50MB)
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
 // Import API modules
 const postApi = require("./apis/postApi/postApi");
+const usersApi = require("./apis/usersApi/usersApi");
 const corsConfig = {
   origin: "*",
   credentials: true,
@@ -38,11 +44,13 @@ async function run() {
 
     //collection start
     const postCollection = client.db("sunwings-news").collection("posts");
+    const usersCollection = client.db("sunwings-news").collection("users");
 
     //collection end
 
     // Apis Start
     app.use("/posts", postApi(postCollection));
+    app.use("/users", usersApi(usersCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
