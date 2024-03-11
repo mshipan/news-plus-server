@@ -49,12 +49,18 @@ async function run() {
     //collection start
     const postCollection = client.db("sunwings-news").collection("posts");
     const usersCollection = client.db("sunwings-news").collection("users");
+    const categoryCollection = client
+      .db("sunwings-news")
+      .collection("categories");
+    const logoCollection = client.db("sunwings-news").collection("logos");
 
     //collection end
 
     // Apis Start
     app.use("/posts", postApi(postCollection));
     app.use("/users", usersApi(usersCollection));
+    app.use("/categories", categoryApi(categoryCollection));
+    app.use("/logos", logoApi(logoCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
