@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 // Import API modules
 const postApi = require("./apis/postApi/postApi");
 const usersApi = require("./apis/usersApi/usersApi");
+const categoryApi = require("./apis/categoryApi/categoryApi");
+
 const corsConfig = {
   origin: "*",
   credentials: true,
@@ -45,12 +47,16 @@ async function run() {
     //collection start
     const postCollection = client.db("sunwings-news").collection("posts");
     const usersCollection = client.db("sunwings-news").collection("users");
+    const categoriesCollection = client
+      .db("sunwings-news")
+      .collection("categories");
 
     //collection end
 
     // Apis Start
     app.use("/posts", postApi(postCollection));
     app.use("/users", usersApi(usersCollection));
+    app.use("/categories", categoryApi(categoriesCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
