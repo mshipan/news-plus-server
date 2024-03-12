@@ -14,13 +14,12 @@ const categoryApi = (categoriesCollection) => {
 
   categoryRouter.get("/:selectedCategory", async (req, res) => {
     const selectCategory = req.params.selectedCategory;
-    console.log(req.params.selectedCategory);
+
     const filter = {
       categoryName: selectCategory,
     };
     const result = await categoriesCollection.find(filter).toArray();
     res.send(result);
-    console.log(result);
   });
 
   categoryRouter.post("/", async (req, res) => {
@@ -30,7 +29,7 @@ const categoryApi = (categoriesCollection) => {
     if (foundData?.slug === categoryInfo.slug) {
       return res.status(404).json({ message: "Slug already listed" });
     }
-    console.log(categoryInfo);
+
     const result = await categoriesCollection.insertOne(categoryInfo);
     res.send(result);
   });
