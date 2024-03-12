@@ -1,4 +1,5 @@
 const express = require("express");
+const { ObjectId } = require("mongodb");
 
 const categoryApi = (categoriesCollection) => {
   const categoryRouter = express.Router();
@@ -12,6 +13,7 @@ const categoryApi = (categoriesCollection) => {
     res.send(result);
   });
 
+  //get category by id
   categoryRouter.get("/:selectedCategory", async (req, res) => {
     const selectCategory = req.params.selectedCategory;
 
@@ -22,6 +24,7 @@ const categoryApi = (categoriesCollection) => {
     res.send(result);
   });
 
+  // post categories to db
   categoryRouter.post("/", async (req, res) => {
     const categoryInfo = req.body;
     const query = { slug: req.body.slug };
@@ -31,6 +34,16 @@ const categoryApi = (categoriesCollection) => {
     }
 
     const result = await categoriesCollection.insertOne(categoryInfo);
+    res.send(result);
+    
+  });
+
+  // delete a single category
+  categoryRouter.delete("/:id", async (req, res) => {
+    console.log(req.params);
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await categoriesCollection.deleteOne(query);
     res.send(result);
   });
   return categoryRouter;
