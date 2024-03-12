@@ -12,6 +12,7 @@ const categoryApi = (categoriesCollection) => {
     res.send(result);
   });
 
+  //get category by id
   categoryRouter.get("/:selectedCategory", async (req, res) => {
     const selectCategory = req.params.selectedCategory;
     console.log(req.params.selectedCategory);
@@ -23,6 +24,7 @@ const categoryApi = (categoriesCollection) => {
     console.log(result);
   });
 
+  // post categories to db
   categoryRouter.post("/", async (req, res) => {
     const categoryInfo = req.body;
     const query = { slug: req.body.slug };
