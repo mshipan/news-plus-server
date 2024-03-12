@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 const postApi = require("./apis/postApi/postApi");
 const usersApi = require("./apis/usersApi/usersApi");
 const categoryApi = require("./apis/categoryApi/categoryApi");
-
 const logoApi = require("./apis/logoApi/logoApi");
+const advertisementApi = require("./apis/advertisementApi/advertisementApi");
 
 const corsConfig = {
   origin: "*",
@@ -53,6 +53,9 @@ async function run() {
       .db("sunwings-news")
       .collection("categories");
     const logoCollection = client.db("sunwings-news").collection("logos");
+    const advertisementCollection = client
+      .db("sunwings-news")
+      .collection("advertisements");
 
     //collection end
 
@@ -61,6 +64,7 @@ async function run() {
     app.use("/users", usersApi(usersCollection));
     app.use("/categories", categoryApi(categoryCollection));
     app.use("/logos", logoApi(logoCollection));
+    app.use("/advertisements", advertisementApi(advertisementCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
