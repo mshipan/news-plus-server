@@ -6,7 +6,7 @@ const usersApi = (usersCollection) => {
   //   store user in db
   userRouter.post("/", async (req, res) => {
     const user = req.body;
-    const query = { uid: user.email };
+    const query = { uid: user.uid };
     const existingUser = await usersCollection.findOne(query);
     if (existingUser) {
       return res.send("user already exists");
@@ -25,6 +25,13 @@ const usersApi = (usersCollection) => {
       }
     }
     const result = await usersCollection.find(query).toArray();
+    res.send(result);
+  });
+
+  userRouter.get("/:uid", async (req, res) => {
+    const uid = req.params.uid;
+    const query = { uid: uid };
+    const result = await usersCollection.findOne(query);
     res.send(result);
   });
   return userRouter;
