@@ -11,7 +11,6 @@ const facebookApi = (facebookCollection) => {
 
   facebookRouter.put("/:id", async (req, res) => {
     const id = req.params.id;
-    console.log(id);
     const filter = { _id: new ObjectId(id) };
     const options = { upsert: true };
     const updateFacebook = req.body;
