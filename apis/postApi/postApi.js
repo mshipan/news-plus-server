@@ -1,4 +1,5 @@
 const express = require("express");
+const { ObjectId } = require("mongodb");
 
 const postApi = (postCollection) => {
   const postRouter = express.Router();
@@ -23,6 +24,16 @@ const postApi = (postCollection) => {
     res.send(result);
   });
 
+  // single post apis
+  postRouter.get("/:id", async (req, res) => {
+    console.log(req.params.id);
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await postCollection.findOne(query);
+    res.send(result);
+  });
+
+  // post api
   postRouter.post("/", async (req, res) => {
     const newPost = req.body;
     const result = await postCollection.insertOne(newPost);
