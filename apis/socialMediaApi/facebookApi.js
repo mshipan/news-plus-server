@@ -6,32 +6,29 @@ const facebookApi = (facebookCollection) => {
 
   facebookRouter.get("/", async (req, res) => {
     const result = await facebookCollection.find().toArray();
-
     res.send(result);
   });
 
-  facebookRouter.get("/post/:id", async (req, res) => {
+  facebookRouter.put("/:id", async (req, res) => {
     const id = req.params.id;
-    const query = { _id: new ObjectId(id) };
-    const result = await facebookCollection.findOne(query);
+    const filter = { _id: new ObjectId(id) };
+    const options = { upsert: true };
+    const updateFacebook = req.body;
+    const newFacebook = {
+      $set: {
+        title: updateFacebook.title,
+        link: updateFacebook.link,
+        profilePhoto: updateFacebook.profilePhoto,
+        coverPhoto: updateFacebook.coverPhoto,
+      },
+    };
+    const result = await facebookCollection.updateOne(
+      filter,
+      newFacebook,
+      options
+    );
     res.send(result);
   });
-
-  // facebookRouter.patch("/:id", async (req, res) => {
-  //   const id = req.params.id;
-  //   const filter = { _id: new ObjectId(id) };
-  //   const facebook = req.body;
-  //   const updateFacebook = {
-  //     $set: {
-  //       title: facebook.title,
-  //       link: facebook.link,
-  //       profilePhoto: facebook.profilePhoto,
-  //       coverPhoto: facebook.coverPhoto,
-  //     },
-  //   };
-  //   const result = await facebookCollection.updateOne(filter, updateFacebook);
-  //   res.send(result);
-  // });
 
   return facebookRouter;
 };
