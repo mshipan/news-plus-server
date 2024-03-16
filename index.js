@@ -17,6 +17,7 @@ const categoryApi = require("./apis/categoryApi/categoryApi");
 const logoApi = require("./apis/logoApi/logoApi");
 const advertisementApi = require("./apis/advertisementApi/advertisementApi");
 const facebookApi = require("./apis/socialMediaApi/facebookApi");
+const twitterApi = require("./apis/socialMediaApi/twitterApi");
 
 const corsConfig = {
   origin: "*",
@@ -58,6 +59,7 @@ async function run() {
       .db("sunwings-news")
       .collection("advertisements");
     const faceookCollection = client.db("sunwings-news").collection("facebook");
+    const twitterCollection = client.db("sunwings-news").collection("twitter");
 
     //collection end
 
@@ -68,6 +70,7 @@ async function run() {
     app.use("/logos", logoApi(logoCollection));
     app.use("/advertisements", advertisementApi(advertisementCollection));
     app.use("/facebook", facebookApi(faceookCollection));
+    app.use("/twitter", twitterApi(twitterCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
