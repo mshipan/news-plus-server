@@ -19,6 +19,7 @@ const advertisementApi = require("./apis/advertisementApi/advertisementApi");
 const facebookApi = require("./apis/socialMediaApi/facebookApi");
 const twitterApi = require("./apis/socialMediaApi/twitterApi");
 const instagramApi = require("./apis/socialMediaApi/instagramApi");
+const youtubeApi = require("./apis/socialMediaApi/youtubeApi");
 
 const corsConfig = {
   origin: "*",
@@ -64,6 +65,7 @@ async function run() {
     const instagramCollection = client
       .db("sunwings-news")
       .collection("instagram");
+    const youtubeCollection = client.db("sunwings-news").collection("youtube");
 
     //collection end
 
@@ -76,6 +78,7 @@ async function run() {
     app.use("/facebook", facebookApi(faceookCollection));
     app.use("/twitter", twitterApi(twitterCollection));
     app.use("/instagram", instagramApi(instagramCollection));
+    app.use("/youtube", youtubeApi(youtubeCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
