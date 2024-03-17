@@ -15,7 +15,10 @@ const postApi = (postCollection) => {
     if (req.query.subCategory) {
       query.subCategory = subCategory;
     }
-    const result = await postCollection.find(query).toArray();
+    const result = await postCollection
+      .find(query)
+      .sort({ publishDate: -1 })
+      .toArray();
 
     if (result.length === 0) {
       return res.status(404).json({ message: "No data available" });
