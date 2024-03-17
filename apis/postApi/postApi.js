@@ -15,7 +15,10 @@ const postApi = (postCollection) => {
     if (req.query.subCategory) {
       query.subCategory = subCategory;
     }
-    const result = await postCollection.find(query).toArray();
+    const result = await postCollection
+      .find(query)
+      .sort({ publishDate: -1 })
+      .toArray();
 
     if (result.length === 0) {
       return res.status(404).json({ message: "No data available" });
@@ -26,7 +29,6 @@ const postApi = (postCollection) => {
 
   // single post apis
   postRouter.get("/:id", async (req, res) => {
-    console.log(req.params.id);
     const id = req.params.id;
     const query = { _id: new ObjectId(id) };
     const result = await postCollection.findOne(query);
