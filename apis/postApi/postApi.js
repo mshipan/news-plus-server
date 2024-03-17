@@ -26,8 +26,10 @@ const postApi = (postCollection) => {
 
   // single post apis
   postRouter.get("/:id", async (req, res) => {
-    console.log(req.params.id);
     const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
     const query = { _id: new ObjectId(id) };
     const result = await postCollection.findOne(query);
     res.send(result);
@@ -39,6 +41,42 @@ const postApi = (postCollection) => {
     const result = await postCollection.insertOne(newPost);
     res.send(result);
   });
+
+  postRouter.put("/:id", async (req, res) => {
+    const id = req.params.id;
+    const filter = { _id: new ObjectId(id) };
+    const options = { upsert: true };
+    const updatePost = req.body;
+    const currentDate = new Date();
+    const newPost = {
+      $set: {
+        postTitle: updatePost.postTitle,
+        category: updatePost.category,
+        subCategory: updatePost.subCategory,
+        quill: updatePost.quill,
+        status: updatePost.status,
+        postThumbnail: updatePost.postThumbnail,
+        updateDate: currentDate,
+        updateAuthor: updatePost?.updateAuthor,
+        updateAuthorImage: updatePost?.updateAuthorImage,
+        updateAuthorEmail: updatePost?.updateAuthorEmail,
+      },
+    };
+    const result = await postCollection.updateOne(filter, newPost, options);
+    res.send(result);
+  });
+
+  postRouter.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+
+    const query = { _id: new ObjectId(id) };
+    const result = await postCollection.deleteOne(query);
+    res.send(result);
+  });
+
   return postRouter;
 };
 
