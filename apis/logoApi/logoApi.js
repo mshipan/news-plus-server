@@ -1,4 +1,5 @@
 const express = require("express");
+const { ObjectId } = require("mongodb");
 
 const logoApi = (logoCollection) => {
   const logoRouter = express.Router();
@@ -18,7 +19,21 @@ const logoApi = (logoCollection) => {
 
   logoRouter.post("/", async (req, res) => {
     const newLogo = req.body;
+    newLogo.isSelected = false;
     const result = await logoCollection.insertOne(newLogo);
+    res.send(result);
+  });
+
+  logoRouter.patch("/:id", async (req, res) => {
+    const id = req.params.id;
+    const { isSelected } = req.body;
+    const filter = { _id: new ObjectId(id) };
+    const updateLogo = {
+      $set: {
+        isSelected: isSelected,
+      },
+    };
+    const result = await logoCollection.updateOne(filter, updateLogo);
     res.send(result);
   });
 
