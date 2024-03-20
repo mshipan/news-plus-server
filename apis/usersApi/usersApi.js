@@ -34,6 +34,29 @@ const usersApi = (usersCollection) => {
     const result = await usersCollection.findOne(query);
     res.send(result);
   });
+
+  // set role api
+  userRouter.put("/:uid", async (req, res) => {
+    const uid = req.params.uid;
+    const role = req.body;
+    console.log(uid, role);
+    const query = { uid: uid };
+    const options = { upsert: true };
+    const updatedDoc = {
+      $set: role,
+    };
+    const result = await usersCollection.updateOne(query, updatedDoc, options);
+    res.send(result);
+  });
+
+  // delete a user
+  userRouter.delete("/:uid", async (req, res) => {
+    const uid = req.params.uid;
+    const query = { uid: uid };
+    const result = await usersCollection.deleteOne(query);
+    res.send(result);
+  });
+
   return userRouter;
 };
 module.exports = usersApi;
