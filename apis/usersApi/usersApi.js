@@ -36,14 +36,14 @@ const usersApi = (usersCollection) => {
   });
 
   // set role api
-  userRouter.put("/:uid", async (req, res) => {
-    const uid = req.params.uid;
-    const role = req.body;
+  userRouter.put("/role", async (req, res) => {
+    const uid = req.query.uid;
+    const role = req.query.role;
     console.log(uid, role);
     const query = { uid: uid };
     const options = { upsert: true };
     const updatedDoc = {
-      $set: role,
+      $set: { role },
     };
     const result = await usersCollection.updateOne(query, updatedDoc, options);
     res.send(result);
