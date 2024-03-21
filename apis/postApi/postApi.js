@@ -45,6 +45,7 @@ const postApi = (postCollection) => {
     res.send(result);
   });
 
+  // update a post
   postRouter.put("/:id", async (req, res) => {
     const id = req.params.id;
     const filter = { _id: new ObjectId(id) };
@@ -69,6 +70,22 @@ const postApi = (postCollection) => {
     res.send(result);
   });
 
+  // update a post isPopular
+  postRouter.put("/popular/:id", async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+    const options = { upsert: true };
+    const query = { _id: new ObjectId(id) };
+    const updatedDoc = { $set: data };
+    const result = await postCollection.updateOne(query, updatedDoc, options);
+    res.send(result);
+  });
+
+  // delete a post
   postRouter.delete("/:id", async (req, res) => {
     const id = req.params.id;
     if (!ObjectId.isValid(id)) {
