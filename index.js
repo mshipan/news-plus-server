@@ -23,6 +23,7 @@ const twitterApi = require("./apis/socialMediaApi/twitterApi");
 const instagramApi = require("./apis/socialMediaApi/instagramApi");
 const youtubeApi = require("./apis/socialMediaApi/youtubeApi");
 const footerApi = require("./apis/footerApi/footerApi");
+const footerThemeApi = require("./apis/footerApi/footerThemeApi");
 
 const corsConfig = {
   origin: "*",
@@ -92,6 +93,7 @@ async function run() {
     app.use("/instagram", instagramApi(instagramCollection));
     app.use("/youtube", youtubeApi(youtubeCollection));
     app.use("/footer", footerApi(footerCollection));
+    app.use("/footer-theme", footerThemeApi(footerCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
