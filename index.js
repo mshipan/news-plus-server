@@ -17,6 +17,7 @@ const categoryApi = require("./apis/categoryApi/categoryApi");
 const logoApi = require("./apis/logoApi/logoApi");
 const advertisementApi = require("./apis/advertisementApi/advertisementApi");
 const photoGalleryApi = require("./apis/photoGalleryApi/photoGalleryApi");
+const videoGalleryApi = require("./apis/videoGalleryApi/videoGalleryApi");
 const facebookApi = require("./apis/socialMediaApi/facebookApi");
 const twitterApi = require("./apis/socialMediaApi/twitterApi");
 const instagramApi = require("./apis/socialMediaApi/instagramApi");
@@ -65,6 +66,9 @@ async function run() {
     const photoGalleryCollection = client
       .db("sunwings-news")
       .collection("photo-gallery");
+    const videoGalleryCollection = client
+      .db("sunwings-news")
+      .collection("video-gallery");
     const faceookCollection = client.db("sunwings-news").collection("facebook");
     const twitterCollection = client.db("sunwings-news").collection("twitter");
     const instagramCollection = client
@@ -82,6 +86,7 @@ async function run() {
     app.use("/logos", logoApi(logoCollection));
     app.use("/advertisements", advertisementApi(advertisementCollection));
     app.use("/photo-gallery", photoGalleryApi(photoGalleryCollection));
+    app.use("/video-gallery", videoGalleryApi(videoGalleryCollection));
     app.use("/facebook", facebookApi(faceookCollection));
     app.use("/twitter", twitterApi(twitterCollection));
     app.use("/instagram", instagramApi(instagramCollection));
