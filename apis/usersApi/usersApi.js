@@ -31,7 +31,7 @@ const usersApi = (usersCollection) => {
   userRouter.get("/:uid", async (req, res) => {
     const uid = req.params.uid;
     const query = { uid: uid };
-    console.log(query);
+    // console.log(query);
     const result = await usersCollection.findOne(query);
     res.send(result);
   });

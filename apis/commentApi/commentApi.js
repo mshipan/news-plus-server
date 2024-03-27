@@ -13,6 +13,9 @@ const commentApi = (commentCollection) => {
   //   get comment by news id
   commentRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
+    const query = { newsId: id };
+    const result = await commentCollection.find(query).toArray();
+    res.send(result);
   });
   return commentRouter;
 };
