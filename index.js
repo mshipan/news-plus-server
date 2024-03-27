@@ -24,6 +24,7 @@ const instagramApi = require("./apis/socialMediaApi/instagramApi");
 const youtubeApi = require("./apis/socialMediaApi/youtubeApi");
 const footerApi = require("./apis/footerApi/footerApi");
 const footerThemeApi = require("./apis/footerApi/footerThemeApi");
+const commentApi = require("./apis/commentApi/commentApi");
 
 const corsConfig = {
   origin: "*",
@@ -77,6 +78,7 @@ async function run() {
       .collection("instagram");
     const youtubeCollection = client.db("sunwings-news").collection("youtube");
     const footerCollection = client.db("sunwings-news").collection("footer");
+    const commentCollection = client.db("sunwings-news").collection("comments");
 
     //collection end
 
@@ -94,6 +96,7 @@ async function run() {
     app.use("/youtube", youtubeApi(youtubeCollection));
     app.use("/footer", footerApi(footerCollection));
     app.use("/footer-theme", footerThemeApi(footerCollection));
+    app.use("/comments", commentApi(commentCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection

@@ -20,7 +20,7 @@ const usersApi = (usersCollection) => {
     let query = {};
     const email = req.query.email;
     if (req.query.email) {
-      query: {
+      query:{
         email: email;
       }
     }
