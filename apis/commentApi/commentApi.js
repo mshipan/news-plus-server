@@ -10,12 +10,20 @@ const commentApi = (commentCollection) => {
     res.send(result);
   });
 
+  // get all comments
+  commentRouter.get("/all-comments", async (req, res) => {
+    const result = await commentCollection.find().toArray();
+    res.send(result);
+  });
+
   //   get comment by news id
   commentRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
-    const query = { newsId: id };
-    const result = await commentCollection.find(query).toArray();
-    res.send(result);
+    if (req.params.id) {
+      const query = { newsId: id };
+      const result = await commentCollection.find(query).toArray();
+      res.send(result);
+    }
   });
   return commentRouter;
 };
