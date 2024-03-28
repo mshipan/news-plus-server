@@ -5,10 +5,7 @@ const bodyThemeApi = (bodyThemeCollection) => {
   const bodyThemeRouter = express.Router();
 
   bodyThemeRouter.get("/", async (req, res) => {
-    const result = await bodyThemeCollection
-      .find()
-      .sort({ createdAt: -1 })
-      .toArray();
+    const result = await bodyThemeCollection.find().toArray();
 
     if (result.length === 0) {
       return res.status(404).json({ message: "No data available" });
