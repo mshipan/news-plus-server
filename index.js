@@ -28,9 +28,16 @@ const bodyThemeApi = require("./apis/bodyThemeApi/bodyThemeApi");
 const commentApi = require("./apis/commentApi/commentApi");
 
 const corsConfig = {
-  origin: "*",
+  origin: [
+    "https://lnews1.sbmaxitpark.com",
+    "http://lnews1.sbmaxitpark.com",
+    "lnews1.sbmaxitpark.com",
+    "http://localhost:5173",
+  ],
+
   credentials: true,
   optionSuccessStatus: 200,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 };
 
 // middlewares
