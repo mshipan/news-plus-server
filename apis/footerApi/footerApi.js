@@ -21,6 +21,7 @@ const footerApi = (footerCollection) => {
     const updateFooter = req.body;
     const newFooter = {
       $set: {
+        footerLogo: updateFooter.footerLogo,
         about: updateFooter.about,
         sompadokAndProkashok: updateFooter.sompadokAndProkashok,
         nirbahiSompadok: updateFooter.nirbahiSompadok,
