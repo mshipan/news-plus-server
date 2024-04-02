@@ -26,6 +26,7 @@ const footerApi = require("./apis/footerApi/footerApi");
 const footerThemeApi = require("./apis/footerApi/footerThemeApi");
 const bodyThemeApi = require("./apis/bodyThemeApi/bodyThemeApi");
 const commentApi = require("./apis/commentApi/commentApi");
+const noticeApi = require("./apis/noticeApi/noticeApi");
 
 const corsConfig = {
   origin: [
@@ -33,6 +34,9 @@ const corsConfig = {
     "http://lnews1.sbmaxitpark.com",
     "lnews1.sbmaxitpark.com",
     "http://localhost:5173",
+    "https://sunwingsnews.com",
+    "http://sunwingsnews.com",
+    "www.sunwingsnews.com",
   ],
 
   credentials: true,
@@ -88,6 +92,7 @@ async function run() {
     const footerCollection = client.db("sunwings-news").collection("footer");
     const bodyCollection = client.db("sunwings-news").collection("body-theme");
     const commentCollection = client.db("sunwings-news").collection("comments");
+    const noticeCollection = client.db("sunwings-news").collection("notice");
 
     //collection end
 
@@ -107,6 +112,7 @@ async function run() {
     app.use("/footer-theme", footerThemeApi(footerCollection));
     app.use("/body-theme", bodyThemeApi(bodyCollection));
     app.use("/comments", commentApi(commentCollection));
+    app.use("/notice", noticeApi(noticeCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
