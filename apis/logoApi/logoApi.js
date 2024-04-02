@@ -37,6 +37,17 @@ const logoApi = (logoCollection) => {
     res.send(result);
   });
 
+  logoRouter.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+
+    const query = { _id: new ObjectId(id) };
+    const result = await logoCollection.deleteOne(query);
+    res.send(result);
+  });
+
   return logoRouter;
 };
 
