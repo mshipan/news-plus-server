@@ -36,7 +36,10 @@ const corsConfig = {
     "http://localhost:5173",
     "https://sunwingsnews.com",
     "http://sunwingsnews.com",
+    "https://www.sunwingsnews.com",
+    "http://www.sunwingsnews.com",
     "www.sunwingsnews.com",
+    "sunwingsnews.com",
   ],
 
   credentials: true,
