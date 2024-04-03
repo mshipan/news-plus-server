@@ -27,6 +27,7 @@ const postApi = (postCollection) => {
     res.send(result);
   });
 
+
   // single post apis
   postRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
@@ -82,6 +83,17 @@ const postApi = (postCollection) => {
     const query = { _id: new ObjectId(id) };
     const updatedDoc = { $set: data };
     const result = await postCollection.updateOne(query, updatedDoc, options);
+    res.send(result);
+  });
+
+  postRouter.patch("/status/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+    const query = { _id: new ObjectId(id) };
+    const updatedDoc = { $set: { status: "published" } };
+    const result = await postCollection.updateOne(query, updatedDoc);
     res.send(result);
   });
 
