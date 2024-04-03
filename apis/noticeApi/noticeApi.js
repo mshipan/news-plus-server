@@ -1,4 +1,5 @@
 const express = require("express");
+const { ObjectId } = require("mongodb");
 const noticeApi = (noticeCollection) => {
   const noticeRouter = express.Router();
 
@@ -15,6 +16,17 @@ const noticeApi = (noticeCollection) => {
       .find()
       .sort({ createdAt: -1 })
       .toArray();
+    res.send(result);
+  });
+
+  // delete a notice
+  noticeRouter.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+    const query = { _id: new ObjectId(id) };
+    const result = await noticeCollection.deleteOne(query);
     res.send(result);
   });
 
