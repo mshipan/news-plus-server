@@ -27,6 +27,7 @@ const footerThemeApi = require("./apis/footerApi/footerThemeApi");
 const bodyThemeApi = require("./apis/bodyThemeApi/bodyThemeApi");
 const commentApi = require("./apis/commentApi/commentApi");
 const noticeApi = require("./apis/noticeApi/noticeApi");
+const paymentApi = require("./apis/paymentApi/paymentApi");
 
 const corsConfig = {
   origin: [
@@ -96,6 +97,9 @@ async function run() {
     const bodyCollection = client.db("sunwings-news").collection("body-theme");
     const commentCollection = client.db("sunwings-news").collection("comments");
     const noticeCollection = client.db("sunwings-news").collection("notice");
+    const paymentsCollection = client
+      .db("sunwings-news")
+      .collection("payments");
 
     //collection end
 
@@ -116,6 +120,7 @@ async function run() {
     app.use("/body-theme", bodyThemeApi(bodyCollection));
     app.use("/comments", commentApi(commentCollection));
     app.use("/notice", noticeApi(noticeCollection));
+    app.use("/payment", paymentApi(paymentsCollection));
     // Apis End
 
     // Send a ping to confirm a successful connection
