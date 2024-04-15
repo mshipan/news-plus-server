@@ -39,7 +39,7 @@ const noticeApi = (noticeCollection) => {
       .toArray();
     const lastNotice = notices[0];
     const existingEmail = lastNotice?.isOpened.filter((item) => item === email);
-    if (existingEmail.length === 0) {
+    if (existingEmail?.length === 0) {
       lastNotice.isOpened.push(email);
       const updatedDoc = { $set: lastNotice };
       const result = await noticeCollection.updateOne(
