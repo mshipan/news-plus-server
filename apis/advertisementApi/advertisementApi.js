@@ -19,7 +19,10 @@ const advertisementApi = (advertisementCollection) => {
 
   advertisementRouter.post("/", async (req, res) => {
     const newAdvertisement = req.body;
+    const newPrice = newAdvertisement.price;
+    const updatedPrice = parseFloat(newPrice);
     newAdvertisement.isSelected = false;
+    newAdvertisement.price = updatedPrice;
     const result = await advertisementCollection.insertOne(newAdvertisement);
     res.send(result);
   });
