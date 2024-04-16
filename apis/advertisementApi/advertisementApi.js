@@ -23,6 +23,7 @@ const advertisementApi = (advertisementCollection) => {
     const updatedPrice = parseFloat(newPrice);
     newAdvertisement.isSelected = false;
     newAdvertisement.price = updatedPrice;
+    newAdvertisement.status = "pending";
     const result = await advertisementCollection.insertOne(newAdvertisement);
     res.send(result);
   });
@@ -37,6 +38,30 @@ const advertisementApi = (advertisementCollection) => {
       },
     };
     const result = await advertisementCollection.updateOne(filter, updateAd);
+    res.send(result);
+  });
+
+  advertisementRouter.patch("/status/:id", async (req, res) => {
+    const id = req.params.id;
+    const { status } = req.body;
+    const filter = { _id: new ObjectId(id) };
+    const updateAd = {
+      $set: {
+        status: status,
+      },
+    };
+    const result = await advertisementCollection.updateOne(filter, updateAd);
+    res.send(result);
+  });
+
+  advertisementRouter.delete("/:id", async (req, res) => {
+    const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid id format" });
+    }
+
+    const query = { _id: new ObjectId(id) };
+    const result = await advertisementCollection.deleteOne(query);
     res.send(result);
   });
 
