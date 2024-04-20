@@ -42,6 +42,10 @@ const corsConfig = {
     "http://www.sunwingsnews.com",
     "www.sunwingsnews.com",
     "sunwingsnews.com",
+    " http://192.168.0.105:5173",
+    " https://192.168.0.105:5173",
+    " 192.168.0.105:5173",
+    " 192.168.0.105",
   ],
 
   credentials: true,
