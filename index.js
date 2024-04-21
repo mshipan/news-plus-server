@@ -32,20 +32,10 @@ const contactApi = require("./apis/contactApi/contactApi");
 
 const corsConfig = {
   origin: [
-    "https://lnews1.sbmaxitpark.com",
-    "http://lnews1.sbmaxitpark.com",
-    "lnews1.sbmaxitpark.com",
     "http://localhost:5173",
-    "https://sunwingsnews.com",
-    "http://sunwingsnews.com",
-    "https://www.sunwingsnews.com",
-    "http://www.sunwingsnews.com",
-    "www.sunwingsnews.com",
-    "sunwingsnews.com",
-    " http://192.168.0.105:5173",
-    " https://192.168.0.105:5173",
-    " 192.168.0.105:5173",
-    " 192.168.0.105",
+    " https://news-plus-ebb04.web.app",
+    " http://news-plus-ebb04.web.app",
+    " news-plus-ebb04.web.app",
   ],
 
   credentials: true,
@@ -60,7 +50,7 @@ app.use(express.json());
 
 //mongodb start
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.oewoyvr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.1oh7p7d.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
