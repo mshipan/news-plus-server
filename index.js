@@ -33,9 +33,9 @@ const contactApi = require("./apis/contactApi/contactApi");
 const corsConfig = {
   origin: [
     "http://localhost:5173",
-    " https://news-plus-ebb04.web.app",
-    " http://news-plus-ebb04.web.app",
-    " news-plus-ebb04.web.app",
+    "https://news-plus-ebb04.web.app",
+    "http://news-plus-ebb04.web.app",
+    "news-plus-ebb04.web.app",
   ],
 
   credentials: true,
@@ -67,36 +67,30 @@ async function run() {
     await client.connect();
 
     //collection start
-    const postCollection = client.db("sunwings-news").collection("posts");
-    const usersCollection = client.db("sunwings-news").collection("users");
-    const categoryCollection = client
-      .db("sunwings-news")
-      .collection("categories");
-    const logoCollection = client.db("sunwings-news").collection("logos");
+    const postCollection = client.db("news-plus").collection("posts");
+    const usersCollection = client.db("news-plus").collection("users");
+    const categoryCollection = client.db("news-plus").collection("categories");
+    const logoCollection = client.db("news-plus").collection("logos");
     const advertisementCollection = client
-      .db("sunwings-news")
+      .db("news-plus")
       .collection("advertisements");
     const photoGalleryCollection = client
-      .db("sunwings-news")
+      .db("news-plus")
       .collection("photo-gallery");
     const videoGalleryCollection = client
-      .db("sunwings-news")
+      .db("news-plus")
       .collection("video-gallery");
-    const faceookCollection = client.db("sunwings-news").collection("facebook");
-    const twitterCollection = client.db("sunwings-news").collection("twitter");
-    const instagramCollection = client
-      .db("sunwings-news")
-      .collection("instagram");
-    const youtubeCollection = client.db("sunwings-news").collection("youtube");
-    const footerCollection = client.db("sunwings-news").collection("footer");
-    const bodyCollection = client.db("sunwings-news").collection("body-theme");
-    const commentCollection = client.db("sunwings-news").collection("comments");
-    const noticeCollection = client.db("sunwings-news").collection("notice");
-    const paymentsCollection = client
-      .db("sunwings-news")
-      .collection("payments");
+    const faceookCollection = client.db("news-plus").collection("facebook");
+    const twitterCollection = client.db("news-plus").collection("twitter");
+    const instagramCollection = client.db("news-plus").collection("instagram");
+    const youtubeCollection = client.db("news-plus").collection("youtube");
+    const footerCollection = client.db("news-plus").collection("footer");
+    const bodyCollection = client.db("news-plus").collection("body-theme");
+    const commentCollection = client.db("news-plus").collection("comments");
+    const noticeCollection = client.db("news-plus").collection("notice");
+    const paymentsCollection = client.db("news-plus").collection("payments");
     const contactCollection = client
-      .db("sunwings-news")
+      .db("news-plus")
       .collection("user-inquiries");
 
     //collection end
