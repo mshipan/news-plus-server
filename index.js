@@ -36,6 +36,7 @@ const corsConfig = {
     "https://news-plus-ebb04.web.app",
     "http://news-plus-ebb04.web.app",
     "news-plus-ebb04.web.app",
+    "*",
   ],
 
   credentials: true,
